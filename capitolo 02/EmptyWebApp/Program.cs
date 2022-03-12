@@ -5,7 +5,8 @@ app.MapGet("/", () => "Ciao mondo!");
 
 app.MapGet("/info", 
     () => "Worker Process Name: "+
-        System.Diagnostics.Process.GetCurrentProcess().ProcessName);
+        System.Diagnostics.Process.GetCurrentProcess().ProcessName+
+        Environment.NewLine+"Environment: " + app.Environment.EnvironmentName);
 
 
 app.Run();
