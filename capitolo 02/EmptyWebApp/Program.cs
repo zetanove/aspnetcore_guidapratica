@@ -1,7 +1,7 @@
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-app.MapGet("/", () => "Ciao mondo!");
+app.MapGet("/", () => "Hello World!");
 
 app.MapGet("/info", 
     () => "Worker Process Name: "+

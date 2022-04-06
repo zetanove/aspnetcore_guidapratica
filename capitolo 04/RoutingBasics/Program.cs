@@ -3,6 +3,10 @@ var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
 
+app.MapGet("/hello/{name:alpha}", (string name) => $"Hello {name}!");
+
+
+
 app.MapGet("{first}/{second}", async context =>
 {
     await context.Response.WriteAsync("Request route match -> {first}/{second}");
@@ -13,6 +17,8 @@ app.MapGet("{first}/{second}", async context =>
             .WriteAsync($"{part.Key}: {part.Value}\n");
     }
 }); ;
+
+app.MapGet("/register/{user:alpha:minlength(10)}", (string user) => $"Hello {user}!");
 
 //app.UseEndpoints(endpoints =>
 //{
@@ -42,5 +48,9 @@ app.MapGet("{first}/{second}", async context =>
 //        await context.Response.WriteAsync("no pattern match");
 //    });
 //});
+
+app.MapFallback(async context => {
+    await context.Response.WriteAsync("Nessun altro endpoint ha gestito la richiesta!");
+});
 
 app.Run();

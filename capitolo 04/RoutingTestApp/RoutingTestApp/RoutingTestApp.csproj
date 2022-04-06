@@ -10,4 +10,12 @@
     <PackageReference Include="Rick.Docs.Samples.RouteInfo" Version="1.0.0.8" />
   </ItemGroup>
 
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Blog\Article.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Blog\Article.cshtml" />
+  </ItemGroup>
+
 </Project>
