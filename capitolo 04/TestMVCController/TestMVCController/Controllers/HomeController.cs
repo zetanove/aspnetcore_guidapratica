@@ -38,14 +38,13 @@ namespace TestMVCController.Controllers
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
-        {
+        { 
             _logger = logger;
         }
-
         
         public IActionResult Index()
         {
-            
+            _logger.Log(LogLevel.Information, "Sono nell'action Index!");
             return View();
         }
 
