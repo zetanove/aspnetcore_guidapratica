@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+</div>
+
+<div>
+    <ul>
+    <li><a asp-action="DownloadFile">DownloadFile</a>: download file.</li>
+        <li><a asp-action="JsonResultTest2">JsonResultTest 2</a>: returns a partial view.  If you click this link you will see the view's content but be missing the page styles and layout.</li>
+    <li><a asp-action="JsonResultTest">JsonResult</a>: returns a JSON object.  This can convert any class or anonymous object to JSON.</li>
+    <li><a asp-action="ContentResultTest">ContentResult</a>: returns raw content to the requester.  This is often used for dynamic content, like in single-page applications.</li>
+</ul>
+</div>
