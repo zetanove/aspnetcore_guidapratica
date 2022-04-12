@@ -1,8 +1,15 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var contact = new Contact { Email = "info@antoniopelleriti.it", Tel = "123.4567890" };
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<partial name="_Contacts" model="@contact"></partial>
+
+<hr />
+
+@Html.Partial("_Contacts", contact)
