@@ -14,12 +14,15 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
+                <input asp-for="Id" class="form-control"/>
                 <span asp-validation-for="Id" class="text-danger"></span>
             </div>
             <div class="form-group">
+                @Html.LabelFor(m=>m.Titolo, new {@class="control-label"})
+                @Html.TextBoxFor(m=>m.Titolo, new {@class="form-control"})
+
                 <label asp-for="Titolo" class="control-label"></label>
-                <input asp-for="Titolo" class="form-control" />
+                <input asp-for="Titolo" class="form-control"/>
                 <span asp-validation-for="Titolo" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -38,15 +41,15 @@
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="Category" class="control-label"></label>
+                <label asp-for="Categoria" class="control-label"></label>
                 
-                @Html.DropDownList("Category",
+                @Html.DropDownList("Categoria",
                     categoryService.GetCategories().Select(c => 
                         new SelectListItem() { Text = c, Value = c }),
                         new { @class="k"}
                         )
 
-                <span asp-validation-for="Category" class="text-danger"></span>
+                <span asp-validation-for="Categoria" class="text-danger"></span>
 
             </div>
             <hr />

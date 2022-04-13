@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Net;
 using TestMVCController.Models;
 
 namespace TestMVCController.Controllers
@@ -51,6 +52,13 @@ namespace TestMVCController.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public async Task<JsonResult> GetJson()
+        {
+            HttpClient client = new();
+            var json=await client.GetStringAsync("https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-andamento-nazionale.json");
+            return Json(json);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

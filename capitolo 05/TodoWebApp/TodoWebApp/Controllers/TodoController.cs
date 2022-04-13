@@ -20,7 +20,7 @@ namespace TodoWebApp.Controllers
         // GET: TodoController/Create
         public ActionResult Create()
         {
-            return View();
+            return View("Create");
         }
 
         // POST: TodoController/Create

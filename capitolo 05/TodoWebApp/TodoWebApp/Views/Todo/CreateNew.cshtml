@@ -1,0 +1,12 @@
+﻿@model Todo
+@inject CategoryService categoryService
+
+
+<div>
+    <label asp-for="Categoria" class="control-label"></label>
+
+    @Html.DropDownListFor(t=>t.Categoria,
+        categoryService.GetCategories().Select(c =>
+            new SelectListItem() { Text = c, Value = c })
+        )
+</div>

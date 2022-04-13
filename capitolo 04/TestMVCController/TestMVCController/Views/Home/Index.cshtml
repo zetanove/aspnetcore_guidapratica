@@ -2,7 +2,22 @@
     ViewData["Title"] = "Home Page";
 }
 
+<script>
+    function LoadData() {
+        $.ajax({
+            url: '@Url.Action("GetJson", "Home")',
+            async : true,
+            success: function(result) {
+                console.log('Data received: ');
+                console.log(result);
+            }
+        });
+    }
+</script>
+
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<a href="javascript:LoadData()">Carica Dati</a>
