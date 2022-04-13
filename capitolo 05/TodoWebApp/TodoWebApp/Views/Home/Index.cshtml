@@ -2,6 +2,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     Layout = "_Layout";
     ViewData["Title"] = "Home Page";
+    var contact = new Contact { Email = "info@antoniopelleriti.it", Tel = "123.4567890" };
 }
 
 <div class="text-center">
@@ -9,4 +10,8 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
-@Html.ActionLink("Vai alla pagina Privacy", "Privacy", "Home")
+<partial name="_Contacts" model="@contact"></partial>
+
+<hr />
+
+@Html.Partial("_Contacts", contact)

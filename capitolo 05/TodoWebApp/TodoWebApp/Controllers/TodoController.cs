@@ -1,14 +1,35 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TodoWebApp.Models;
 
 namespace TodoWebApp.Controllers
 {
     public class TodoController : Controller
     {
+
+        List<Todo> listTodos;
+
+        public TodoController()
+        {
+            if (listTodos == null)
+            {
+                listTodos = new();
+                for (int i = 0; i < 10; i++)
+                {
+                    listTodos.Add(new() { Id = i, Descrizione = "Descrizione dell'attività " + i, Titolo = "Titolo " + i });
+                }
+            }
+        }
+
         // GET: TodoController
         public ActionResult Index()
         {
-            return View();
+            return View(listTodos);
+        }
+
+        public ActionResult List()
+        {
+            return View(listTodos);
         }
 
         // GET: TodoController/Details/5
