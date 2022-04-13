@@ -16,7 +16,11 @@ namespace TodoWebApp.Controllers
                 listTodos = new();
                 for (int i = 0; i < 10; i++)
                 {
-                    listTodos.Add(new() { Id = i, Descrizione = "Descrizione dell'attività " + i, Titolo = "Titolo " + i });
+                    listTodos.Add(new() { Id = i, 
+                        Descrizione = "Descrizione dell'attività " + i, 
+                        Titolo = "Titolo " + i,
+                        Promemoria = DateTime.Today.AddDays(1),
+                    });
                 }
             }
         }
@@ -35,7 +39,12 @@ namespace TodoWebApp.Controllers
         // GET: TodoController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var model= listTodos.Find(t => t.Id == id);
+            if (model == null)
+            {
+                return NotFound("Attività con id=" + id +" non trovata");
+            }
+            return View(model);
         }
 
         // GET: TodoController/Create
@@ -59,10 +68,16 @@ namespace TodoWebApp.Controllers
             }
         }
 
-        // GET: TodoController/Edit/5
+        // GET: TodoController/Edit/id
         public ActionResult Edit(int id)
         {
-            return View();
+            var model = listTodos.Find(t => t.Id == id);
+            if (model == null)
+            {
+                TempData["ErrorMessage"] = $"Attività {id} non trovata";
+                return RedirectToAction(nameof(List));
+            }
+            return View(model);
         }
 
         // POST: TodoController/Edit/5

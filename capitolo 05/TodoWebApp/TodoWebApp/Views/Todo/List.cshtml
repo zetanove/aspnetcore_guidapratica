@@ -1,6 +1,14 @@
 ﻿@model IEnumerable<TodoWebApp.Models.Todo>
 <h1>Elenco attività</h1>
 
+@if (TempData["ErrorMessage"] is string error)
+{
+    <div class="alert alert-danger">
+        @error
+    </div>
+}
+
+
 <table class="table">
     <thead>
         <tr>
@@ -12,6 +20,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Descrizione)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Promemoria)
             </th>
             <th></th>            
         </tr>
@@ -28,10 +39,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Descrizione)
             </td>
-            
             <td>
-                @Html.ActionLink("Modifica", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Elimina", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.DisplayFor(modelItem => item.Promemoria)
+            </td>
+            <td>
+                <a asp-action="Details", asp-route-id="@item.Id">Dettagli</a> |
+                <a asp-action="Edit", asp-route-id="@item.Id">Modifica</a> |
+                @Html.ActionLink("Elimina", "Delete", new { id=item.Id })
             </td>
         </tr>
 }

@@ -1,0 +1,21 @@
+﻿@model Todo
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@Model.Titolo</title>
+</head>
+<body>
+<div>
+    <div class="form-group">
+        <label asp-for="Titolo"></label>
+        @Html.DisplayFor(m => m.Titolo)
+    </div>
+    <div class="form-group">
+        <label asp-for="Promemoria"></label>
+        @Html.DisplayFor(m => m.Promemoria)
+    </div>
+</div>
+</body>
+</html>
