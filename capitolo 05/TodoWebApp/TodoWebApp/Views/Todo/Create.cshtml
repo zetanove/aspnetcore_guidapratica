@@ -38,7 +38,7 @@
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="Category" class="control-label"></label>
+                <label asp-for="Categoria" class="control-label"></label>
                 
                 @Html.DropDownList("Category",
                     categoryService.GetCategories().Select(c => 
@@ -46,7 +46,7 @@
                         new { @class="k"}
                         )
 
-                <span asp-validation-for="Category" class="text-danger"></span>
+                <span asp-validation-for="Categoria" class="text-danger"></span>
 
             </div>
             <hr />
