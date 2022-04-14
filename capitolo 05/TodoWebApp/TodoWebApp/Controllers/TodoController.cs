@@ -11,6 +11,8 @@ namespace TodoWebApp.Controllers
 
         public TodoController()
         {
+            if (HttpContext.Items.TryGetValue("List", out object? list) && list is List<Todo> listTodo)
+                listTodos = listTodo;
             if (listTodos == null)
             {
                 listTodos = new();
@@ -22,6 +24,7 @@ namespace TodoWebApp.Controllers
                         Promemoria = DateTime.Today.AddDays(1),
                     });
                 }
+                HttpContext.Items.Add("List", listTodos);
             }
         }
 
@@ -80,25 +83,40 @@ namespace TodoWebApp.Controllers
             return View(model);
         }
 
-        // POST: TodoController/Edit/5
+       
+       
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Todo item)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+                var model = listTodos.Find(t => t.Id == item.Id);
+                if (model == null)
+                {
+                    listTodos.Add(item);
+                    
+                }
+                else
+                {
+                    model.Id = item.Id;
+                    model.Titolo = item.Titolo;
+                    model.Promemoria = item.Promemoria;
+                    model.Completato = item.Completato;
+                }
+                return RedirectToAction(nameof(List));
+            }  
+            return View(item);
         }
 
+        [HttpPost]
+      
         // GET: TodoController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var model = listTodos.Find(t => t.Id == id);
+            return View("");
         }
 
         // POST: TodoController/Delete/5

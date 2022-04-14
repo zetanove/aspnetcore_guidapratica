@@ -1,10 +1,13 @@
 ﻿@model TodoWebApp.Models.Todo
+@inject CategoryService categoryService
+
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = Model.Id==0 ? "Inserimento" : "Modifica";
+    var Categorie = categoryService.GetCategories().Select(m=> new SelectListItem() { Text = m, Value = m });
 }
 
-<h1>Edit</h1>
+<h1>@ViewData["Title"]</h1>
 
 <h4>Todo</h4>
 <hr />
@@ -40,20 +43,21 @@
             </div>
             <div class="form-group">
                 <label asp-for="Categoria" class="control-label"></label>
-                <input asp-for="Categoria" class="form-control" />
+                <select asp-for="Categoria" asp-items="Categorie"></select>
                 <span asp-validation-for="Categoria" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
+
         </form>
     </div>
 </div>
-
+<hr/>
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Torna a Lista</a>
 </div>
-
+</br>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

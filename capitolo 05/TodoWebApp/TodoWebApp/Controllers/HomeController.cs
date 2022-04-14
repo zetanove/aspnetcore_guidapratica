@@ -46,5 +46,11 @@ namespace TodoWebApp.Controllers
             ViewData["Messaggio"] = d;
             return View("Index");
         }
+
+        public PartialViewResult ContactPartialView()
+        {
+            return PartialView("_Contacts");
+        }
+
     }
 }

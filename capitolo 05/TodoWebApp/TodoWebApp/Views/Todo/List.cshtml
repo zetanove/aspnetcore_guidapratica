@@ -1,12 +1,7 @@
 ﻿@model IEnumerable<TodoWebApp.Models.Todo>
 <h1>Elenco attività</h1>
 
-@if (TempData["ErrorMessage"] is string error)
-{
-    <div class="alert alert-danger">
-        @error
-    </div>
-}
+<partial name="_ErrorAlert" model=@TempData["ErrorMessage"] />
 
 
 <table class="table">
