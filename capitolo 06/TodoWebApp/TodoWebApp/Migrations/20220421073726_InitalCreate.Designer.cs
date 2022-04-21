@@ -12,8 +12,8 @@ using TodoWebApp.Models;
 namespace TodoWebApp.Migrations
 {
     [DbContext(typeof(TodoDbContext))]
-    [Migration("20220420232017_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220421073726_InitalCreate")]
+    partial class InitalCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -55,6 +55,11 @@ namespace TodoWebApp.Migrations
 
                     b.Property<bool>("Completata")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime>("CreationDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<string>("Dettagli")
                         .HasColumnType("nvarchar(max)");

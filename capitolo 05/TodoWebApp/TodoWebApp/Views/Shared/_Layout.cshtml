@@ -42,6 +42,9 @@
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2022 - TodoWebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            
+            @(await Component.InvokeAsync("Contacts", new {Email = "info@ffff.it"}))  
+
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

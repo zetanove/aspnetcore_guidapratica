@@ -31,6 +31,13 @@ namespace TodoWebApp.Models
         }
     }
 
+    [NotMapped]
+    class Fake
+    {
+        public int ID { get; set; }
+    }
+
+
     [Table("Todo")]
     public class Todo 
     {
@@ -55,6 +62,7 @@ namespace TodoWebApp.Models
         [ForeignKey("IDUtente")]
         public virtual Utente? Utente { get; set; }
 
+        [NotMapped]
         public DateTime CreationDate { get; set; }
     }
 
@@ -64,6 +72,7 @@ namespace TodoWebApp.Models
         [Key]
         public int IDCategoria { get; set; }
 
+        [Required(ErrorMessage = "Il nome della categoria è obbligatorio")]
         public string NomeCategoria { get; set; }
 
         public string? Colore { get; set; }

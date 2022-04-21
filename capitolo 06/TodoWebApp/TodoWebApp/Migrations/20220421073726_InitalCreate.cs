@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TodoWebApp.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitalCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,7 +47,8 @@ namespace TodoWebApp.Migrations
                     Promemoria = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Completata = table.Column<bool>(type: "bit", nullable: false),
                     IDCategoria = table.Column<int>(type: "int", nullable: true),
-                    IDUtente = table.Column<int>(type: "int", nullable: true)
+                    IDUtente = table.Column<int>(type: "int", nullable: true),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()")
                 },
                 constraints: table =>
                 {

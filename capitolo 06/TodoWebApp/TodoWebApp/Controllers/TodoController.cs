@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TodoWebApp.Models;
 
 namespace TodoWebApp.Controllers
@@ -13,10 +14,27 @@ namespace TodoWebApp.Controllers
             db = context;
         }
 
+        public IActionResult Categorie() => View(db.Categorie.ToList());
+
+
+        public IActionResult TestSql()
+        {
+            var query=db.Categorie.FromSqlRaw("SELECT * FROM Categorie");
+            var list = query.ToList();
+
+            string nome = "Generale";
+            query = db.Categorie.FromSqlRaw("SELECT * FROM Categorie WHERE NomeCategoria={0}", nome);
+
+            return Json(list);
+        }
+
         // GET: TodoController
         public ActionResult Index()
         {
-            var todos = db.Todos;
+            var todos = db.Todos.ToList();
+
+            todos = db.Todos.Where(t=> t.Categoria.NomeCategoria.StartsWith("A")).ToList();
+
             return View(todos);
         }
 
@@ -87,6 +105,57 @@ namespace TodoWebApp.Controllers
             {
                 return View();
             }
+        }
+
+        public IActionResult CreateCategoria() => View(new Categoria());
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateCategoria(Categoria categoria)
+        {
+
+            try
+            {
+                db.Categorie.Add(categoria);
+                db.SaveChanges();
+            }
+            catch
+            {
+                return View(categoria);
+            }
+            return RedirectToAction(nameof(Categorie));
+        }
+
+        public IActionResult EditCategoria(int id)
+        {
+            var categoria = db.Categorie.SingleOrDefault(c => c.IDCategoria == id);
+
+            return View(categoria);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditCategoria(Categoria categoria)
+        {
+            try
+            {
+                db.Update(categoria);
+                int count = await db.SaveChangesAsync();
+                TempData["save"] = categoria.NomeCategoria;
+            }
+            catch
+            {
+                return View(categoria);
+            }
+            return RedirectToAction(nameof(Categorie));
+        }
+
+        public JsonResult DeleteCategoria(int id)
+        {
+            var categoria = db.Categorie.SingleOrDefault(c => c.IDCategoria == id);
+            db.Remove(categoria);
+            db.SaveChanges();
+            return Json(new { message = "Categoria eliminata" });
         }
     }
 }

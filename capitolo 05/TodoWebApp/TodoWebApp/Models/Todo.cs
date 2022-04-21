@@ -6,11 +6,12 @@ namespace TodoWebApp.Models
     {
         public int Id { get; set; }
 
-        //[Display(Name = "Titolo dell'attività")]
-        public string Titolo { get; set; }
+        [Display(Name = "Titolo dell'attività")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Imposta il titolo")]
+        public string? Titolo { get; set; }
 
         
-        public string Descrizione { get; set; }
+        public string? Descrizione { get; set; }
         
         [Display(Name = "Data di promemoria")]
         [DisplayFormat( DataFormatString= "{0:d}")]
@@ -19,7 +20,7 @@ namespace TodoWebApp.Models
         
         public bool Completato { get; set; }
 
-        public string Categoria { get; set; }
+        public string? Categoria { get; set; }
     }
 
     public class CategoryService
