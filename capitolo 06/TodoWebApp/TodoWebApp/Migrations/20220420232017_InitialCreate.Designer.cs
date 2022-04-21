@@ -12,8 +12,8 @@ using TodoWebApp.Models;
 namespace TodoWebApp.Migrations
 {
     [DbContext(typeof(TodoDbContext))]
-    [Migration("20220419223101_InitialSchema")]
-    partial class InitialSchema
+    [Migration("20220420232017_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

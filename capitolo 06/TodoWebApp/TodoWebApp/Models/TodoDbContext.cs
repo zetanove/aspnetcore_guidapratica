@@ -18,9 +18,13 @@ namespace TodoWebApp.Models
         {
             modelBuilder.Entity<Todo>()
             .HasOne(p => p.Categoria)
-            .WithMany(c => c.Todos);
-            //.HasForeignKey(c=>c.IDCategoria);
+            .WithMany(c => c.Todos)
+            .HasForeignKey(c=>c.IDCategoria);
 
+            modelBuilder.Entity<Todo>()
+                .Property(c => c.CreationDate)
+                .HasDefaultValueSql("getdate()");
+            
             modelBuilder.Entity<Categoria>()
             .HasMany(c => c.Todos);
             base.OnModelCreating(modelBuilder);
@@ -34,22 +38,24 @@ namespace TodoWebApp.Models
         [Column("IDTodo")]
         public int ID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Titolo obbligatorio")]
         public string Titolo { get; set; }
         public string? Dettagli { get; set; }
         public DateTime? Promemoria { get; set; }
         public bool Completata { get; set; } = false;
 
         
-        //public int? IDCategoria { get; set; }
+        public int? IDCategoria { get; set; }
 
         [ForeignKey("IDCategoria")]
         public virtual Categoria? Categoria { get; set; }
 
-        //public int? IDUtente { get; set; }
+        public int? IDUtente { get; set; }
 
         [ForeignKey("IDUtente")]
         public virtual Utente? Utente { get; set; }
+
+        public DateTime CreationDate { get; set; }
     }
 
 
