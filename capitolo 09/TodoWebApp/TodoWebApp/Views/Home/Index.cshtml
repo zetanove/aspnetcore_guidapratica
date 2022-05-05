@@ -1,0 +1,21 @@
+﻿@using System.Security.Claims;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    @if (Context?.User?.Identity?.IsAuthenticated ?? false)
+    {
+        <h1 class="display-4">Benvenuto @Context.User?.Identity?.Name</h1>
+        @if(Context?.User?.Claims.FirstOrDefault(c=>c.Type== ClaimTypes.Role) is Claim claim)
+        {
+            @claim.Value
+        }
+        <br/>
+        <a href="/Home/Logout">esci</a>
+    }
+    else
+    {
+        <partial name="_LoginPartial"/>
+    }
+</div>

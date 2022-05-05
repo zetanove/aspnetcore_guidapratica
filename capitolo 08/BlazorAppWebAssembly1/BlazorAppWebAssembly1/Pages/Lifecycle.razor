@@ -1,0 +1,58 @@
+﻿@page "/lifecycle"
+
+<h3>Lifecycle</h3>
+
+<ol>
+@foreach (var item in Events)
+{
+   <li>@item</li>
+}
+</ol>
+<button @onclick="Refresh">refresh</button>
+
+@code {
+    private void Refresh()
+    {
+        this.StateHasChanged();
+    }
+
+    List<string> Events = new List<string>();
+
+    public override Task SetParametersAsync(ParameterView parameters)
+    {
+        Events.Add("SetParametersAsync is called");
+        Events.Add(" -> ParameterView contains "+parameters.ToDictionary());
+        return base.SetParametersAsync(parameters);
+    }
+
+    protected override void OnInitialized()
+    {
+        Events.Add("OnInitialized is called");
+    }
+    protected override async Task OnInitializedAsync()
+    { 
+        Events.Add("OnInitializedAsync is called");
+        await Task.Delay(1000);          
+    }
+
+    protected override void OnParametersSet()
+   {
+       Events.Add("OnParameterSet is called");
+   }
+   protected override async Task OnParametersSetAsync()
+   {
+       Events.Add("OnParametersSetAsync is called");
+       await Task.Delay(1000);         
+   }
+
+   protected override void OnAfterRender(bool firstRender)
+   {
+       Events.Add($"OnAfterRender(firstRender: {firstRender}) is called");
+   }
+
+   protected override  async Task OnAfterRenderAsync(bool firstRender)
+   {
+       Events.Add($"OnAfterRenderAsync(firstRender: {firstRender}) is called");
+       await Task.Delay(1000);           
+   }
+}

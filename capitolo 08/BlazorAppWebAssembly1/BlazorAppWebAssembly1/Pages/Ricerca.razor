@@ -1,0 +1,30 @@
+﻿@page "/ricerca"
+
+<h1>Ricerca</h1>
+
+<p>Anno: @Anno</p>
+
+<p>Autore: @Autore</p>
+
+@if(Categorie!=null)
+{
+    <p>Categorie</p>
+    <ul>
+    @foreach(var c in Categorie)
+    {
+        <li>@c</li>
+    }
+    </ul>
+}
+
+@code {
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public int? Anno { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string? Autore { get; set; }
+
+    
+}

@@ -1,0 +1,43 @@
+﻿@page "/create"
+
+@using TodoBlazorApp.Data
+@using Microsoft.EntityFrameworkCore
+@inject NavigationManager Nav
+@inject IDbContextFactory<TodoDbContext> DbFactory
+
+<h3>Crea Attività</h3>
+
+<div class="row">
+<EditForm Model="@todo" OnValidSubmit="Save">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <hr/>
+    <div class="col-md-6">
+    <div class="form-group">
+            <label>Data:</label>
+            <InputDate @bind-Value="todo.Promemoria" class="form-control"></InputDate>
+    </div>
+    <div class="form-group">
+            <label>Titolo:</label>
+            <InputText @bind-Value="todo.Titolo" class="form-control"></InputText>
+    </div>
+    <div class="form-group">
+            <label>Completata:</label>
+            <InputCheckbox @bind-Value="todo.Completata"></InputCheckbox>
+    </div>
+    <hr/>
+    <input type="submit" value="Salva" class="btn btn-success" />
+    </div>
+</EditForm>
+</div>
+@code {
+    private Todo todo=new Todo();
+
+    public void Save()
+    {
+        using var context=DbFactory.CreateDbContext();
+        context.Todos.Add(todo);
+        context.SaveChanges();
+        Nav.NavigateTo("lista");
+    }
+}

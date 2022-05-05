@@ -1,0 +1,53 @@
+﻿@model IEnumerable<TodoWebApp.Models.Todo>
+
+@{
+    ViewData["Title"] = "Lista";
+}
+
+<h1>Elenco Attività</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Titolo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dettagli)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Promemoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Completata)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Titolo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dettagli)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Promemoria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Completata)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

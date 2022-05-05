@@ -1,0 +1,45 @@
+﻿@page "/"
+@inject NavigationManager navman
+@inject IJSRuntime JS
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+
+<button name="btNav" @onclick="ConfirmNavigate">life cycle</button>
+
+<a href='javascript:ExecDotnet("World")'>test js</a>
+
+@code{
+    private void GoTo()
+    {
+        navman.NavigateTo("/lifecycle?param=1");
+    }
+
+    async Task ConfirmNavigate()
+    {
+        if (await JS.InvokeAsync<bool>("confirm", $"Sei sicuro di voler lasciare il sito?"))
+        {
+            navman.NavigateTo("https://www.antoniopelleriti.it");
+        }
+    }
+
+    [JSInvokable]
+    public static double MyMethod(int n)
+    {
+        return Math.Sqrt(n);
+    }
+
+    public async Task TriggerDotNetInstanceMethod()
+    {
+        var dotNetHelper = DotNetObjectReference.Create(this);
+        var result = await JS.InvokeAsync<string>("ExecDotnet", dotNetHelper, 42);
+    }
+
+    [JSInvokable]
+    public static string GetHelloMessage(string passedName) => $"Hello, {passedName}!";
+
+}

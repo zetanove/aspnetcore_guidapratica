@@ -1,0 +1,63 @@
+﻿@model IEnumerable<TodoWebApp.Models.Categoria>
+
+@{
+    ViewData["Title"] = "Categorie";
+}
+
+<script>
+    function EliminaCategoria(idCategoria) {
+        if (confirm('eliminare la categoria?')) {
+            $.ajax({
+                url: '@Url.Action("DeleteCategoria", "Todo")',
+            type: "GET",
+            data: {
+                id: idCategoria
+            }
+        }).done(function(result) {
+            alert(result.message);
+            window.location.reload();
+        });
+        }
+    }
+</script>
+
+<h1>Categorie</h1>
+
+@if (TempData["save"] is string cat)
+{
+    <p class="alert alert-info">
+        Salvataggio categoria <b>@cat</b> avvenuto correttamente!
+    </p>
+}
+<p>
+    <a asp-action="CreateCategoria" class="btn btn-success">Crea nuova categoria</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeCategoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Colore)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeCategoria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Colore)
+            </td>
+            <td>
+                <a asp-action="EditCategoria" class="btn btn-info" asp-route-id="@item.IDCategoria">Modifica</a> 
+                <a href="javascript:EliminaCategoria(@item.IDCategoria)"  class="btn btn-warning">Elimina</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

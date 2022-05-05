@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+
+    var user = this.Context.User;
+    string name = "";
+    if(user.Identity.IsAuthenticated)
+    {
+        name = user.Identity.Name;
+    }
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome @name</h1>
+</div>

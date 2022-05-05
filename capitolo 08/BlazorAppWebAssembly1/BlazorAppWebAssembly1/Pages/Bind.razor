@@ -1,0 +1,23 @@
+﻿@page "/bind"
+
+<h3>Bind</h3>
+
+Titolo:
+<input type="text" @bind="Titolo" @bind:event="oninput"/>
+<br/>
+Completato
+<input type="checkbox" @bind="Completato"/>
+<br/>
+
+<button @onclick="OnSave">Salva</button>
+<p >@Risultato</p>
+@code {
+    public string? Titolo { get; set; }
+    public bool Completato { get; set; }
+
+    public string? Risultato{ get; set; }
+    private void OnSave()
+    {
+        Risultato = Titolo + ", completato: " + (Completato ? "sì" : "no");
+    }
+}

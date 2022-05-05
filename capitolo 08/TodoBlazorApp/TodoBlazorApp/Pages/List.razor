@@ -1,0 +1,70 @@
+﻿@page "/lista"
+@using TodoBlazorApp.Data
+@using Microsoft.EntityFrameworkCore
+@inject IDbContextFactory<TodoDbContext> DbFactory
+@inject WeatherForecastService Svc
+@inject NavigationManager Nav
+
+<h3>Attività</h3>
+
+@if (todos == null)
+{
+    <p><em>caricamento...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Titolo</th>
+                <th>Data</th>
+                <th>Completata</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var todo in todos)
+            {
+                <tr>
+                    <td>@todo.Titolo</td>
+                    <td>@todo.Promemoria?.ToShortDateString()</td>
+                    <td>@(todo.Completata?"sì":"no")</td>
+                    <td>
+                        <button class="btn btn-sm btn-info" @onclick="@(e => EditTodo(todo.ID))">Modifica</button>
+                        <button class="btn btn-sm btn-warning" @onclick="@(e => DeleteTodo(todo.ID))">Elimina</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<button class="btn btn-primary" @onclick="AddTodo">Crea</button>
+
+
+
+@code {
+    private List<Todo> todos;
+
+    protected override Task OnInitializedAsync()
+    {
+        
+        using var context = DbFactory.CreateDbContext();
+        context.Database.EnsureCreated();
+        todos = context.Todos.ToList();
+        return base.OnInitializedAsync();
+    }
+
+    private void AddTodo()
+    {
+        Nav.NavigateTo("/create");
+    }
+
+    private void EditTodo(int id)
+    {
+    }
+
+    private void DeleteTodo(int id)
+    {        
+    }
+}

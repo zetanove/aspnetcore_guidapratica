@@ -1,0 +1,27 @@
+﻿@page "/edittodo"
+@inject IJSRuntime JS
+@inject TodoDbContext Db
+
+<EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    Titolo: 
+    <InputText id="name" @bind-Value="model.Titolo" />
+    <ValidationMessage For="@(() => model.Titolo)"></ValidationMessage> 
+    <hr/>
+    <button type="submit">Salva</button>
+</EditForm>
+
+@code {
+    private Todo model = new();
+
+    private async Task OnValidSubmit(EditContext context)
+    {
+        //Salva
+        Db.Todos.Add(model);
+        Db.SaveChanges();
+
+        await JS.InvokeAsync<string>("alert",  "salvato" );
+
+    }
+}

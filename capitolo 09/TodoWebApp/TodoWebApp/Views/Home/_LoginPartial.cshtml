@@ -1,0 +1,22 @@
+﻿@model UserModel
+
+<h3>Login</h3>
+<form asp-action="Login">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="col-md-2">
+    <div class="form-group">
+        <label>username</label>
+        <input type="text" asp-for="Username" class="form-control" />
+        @Html.ValidationMessageFor(m=>m.Username)
+    </div>
+    <div class="form-group">
+        <label>password</label>
+        <input type="password" asp-for="Password" class="form-control"/>
+        @Html.ValidationMessageFor(m=>m.Password)
+    </div>
+
+    <hr />
+    <input type="submit" value="Entra" />
+    </div>
+</form>
