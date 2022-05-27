@@ -7,6 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="PublishUbuntu\**" />
+    <Compile Remove="Publish\**" />
+    <Compile Remove="_ReSharper.Caches\**" />
+    <Content Remove="PublishUbuntu\**" />
+    <Content Remove="Publish\**" />
+    <Content Remove="_ReSharper.Caches\**" />
+    <EmbeddedResource Remove="PublishUbuntu\**" />
+    <EmbeddedResource Remove="Publish\**" />
+    <EmbeddedResource Remove="_ReSharper.Caches\**" />
+    <None Remove="PublishUbuntu\**" />
+    <None Remove="Publish\**" />
+    <None Remove="_ReSharper.Caches\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 

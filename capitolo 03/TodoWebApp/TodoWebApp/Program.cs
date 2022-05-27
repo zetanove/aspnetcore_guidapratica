@@ -1,3 +1,10 @@
+/*
+ * ASP.NET Core - Guida Pratica
+ * Capitolo 3
+ * Author: Antonio Pelleriti
+ * Esempio Web App MVC
+ */
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

@@ -1,3 +1,11 @@
+/*
+ * ASP.NET Core - Guida Pratica
+ *
+ * Author: Antonio Pelleriti
+ * Esempio web app Razor Pages
+ * Apri /info nel browser per endpoint personalizzato
+ */
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
